@@ -10,6 +10,8 @@ namespace CheckList
     {
         string name;//название чек листа
         List<Task> tasks;//список всех тасков
+        //TODO критерии оценки
+        //TODO объяснения
         
         public CheckList()
         {

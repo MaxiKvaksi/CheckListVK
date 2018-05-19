@@ -22,8 +22,9 @@ namespace CheckList
         {
             int count = 0;
             int text = 0;
+            MainHandler.LoadCheckList();
             InitHeader();
-            for (int i = 1; i < 10; i++)
+            for (int i = 1; i < MainHandler.checkLists[0].Tasks.Count + 1; i++)
             {
                 panelCheckList.Controls.Add(NewRTB(0, 
                     panelCheckList.Controls[panelCheckList.Controls.Count - 5].Height 
@@ -33,12 +34,14 @@ namespace CheckList
                     NewRTB(panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.X 
                     + panelCheckList.Controls[panelCheckList.Controls.Count - 1].Width,
                     panelCheckList.Controls[panelCheckList.Controls.Count - 4].Height 
-                    + panelCheckList.Controls[panelCheckList.Controls.Count - 5].Location.Y + 1, 150));
+                    + panelCheckList.Controls[panelCheckList.Controls.Count - 5].Location.Y + 1, 150,
+                    desc: MainHandler.checkLists[0].Tasks[i - 1].Name));
                 panelCheckList.Controls.Add(
                     NewRTB(panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.X
                     + panelCheckList.Controls[panelCheckList.Controls.Count - 1].Width,
                     panelCheckList.Controls[panelCheckList.Controls.Count - 5].Height
-                    + panelCheckList.Controls[panelCheckList.Controls.Count - 5].Location.Y + 1, 250));
+                    + panelCheckList.Controls[panelCheckList.Controls.Count - 5].Location.Y + 1, 250,
+                    desc: MainHandler.checkLists[0].Tasks[i - 1].Description));
                 panelCheckList.Controls.Add(
                     NewPB(panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.X
                     + panelCheckList.Controls[panelCheckList.Controls.Count - 1].Width,
@@ -56,7 +59,7 @@ namespace CheckList
                 string desc = "", bool color = false)
             {
                 text++;
-                Color c = color ? Color.Black : Color.White;
+                Color c = color ? Color.Gray : Color.White;
                 return new RichTextBox
                 {
                     Location = new System.Drawing
@@ -65,7 +68,7 @@ namespace CheckList
                     Size = new System.Drawing.Size(width, height),
                     TabIndex = 0,
                     Text = desc,
-                    Enabled = false,
+                    ReadOnly = true,
                     BackColor = c,
                     BorderStyle = BorderStyle.FixedSingle
                 };
@@ -102,7 +105,7 @@ namespace CheckList
                     TabIndex = 0,
                     Text = desc,
                     Enabled = true,
-                    BackColor = Color.Gray,
+                    BackColor = Color.White
                 };
                 panel.Controls.Add(new CheckBox {
                     Location = new System.Drawing
@@ -118,19 +121,19 @@ namespace CheckList
                 panelCheckList.Controls.Add(
                     NewRTB(panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.X
                     + panelCheckList.Controls[panelCheckList.Controls.Count - 1].Width,
-                    16, 150,height: 20, desc: "Название действия"));
+                    16, 150,height: 20, desc: "Название действия", color: true));
                 panelCheckList.Controls.Add(
                     NewRTB(panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.X
                     + panelCheckList.Controls[panelCheckList.Controls.Count - 1].Width,
-                    16, 250, height: 20, desc: "Описание"));
+                    16, 250, height: 20, desc: "Описание", color: true));
                 panelCheckList.Controls.Add(
                     NewRTB(panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.X
                     + panelCheckList.Controls[panelCheckList.Controls.Count - 1].Width,
-                    16, 250, height: 20, desc: "Пример"));
+                    16, 250, height: 20, desc: "Пример", color: true));
                 panelCheckList.Controls.Add(
                     NewRTB(panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.X
                     + panelCheckList.Controls[panelCheckList.Controls.Count - 1].Width,
-                    16, 50, height: 20, desc: "Ok"));
+                    16, 50, height: 20, desc: "Ok", color: true));
                 count++;
             }
         }
