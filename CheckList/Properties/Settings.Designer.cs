@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CheckList.Properties
+namespace CheckListNM.Properties
 {
 
 

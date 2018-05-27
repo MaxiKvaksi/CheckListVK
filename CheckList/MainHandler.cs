@@ -1,30 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Word = Microsoft.Office.Interop.Word;
+using Newtonsoft.Json;
+using CheckList_Konstruktor;
 
-namespace CheckList
+namespace CheckListNM
 {
     class MainHandler
     {
-        public static List<CheckList> checkLists = new List<CheckList>();
-        public static void LoadCheckList()
+        public static Form MainForm;
+        public static Form TestForm;
+        public static int timeResult = 0;
+        public static Subjects subjects = new Subjects();
+        public static Platoons platoons = new Platoons();
+        public static Session session;
+        public static List<CheckList> checkLists = new List<CheckList>();   
+
+        public static void LoadInfo()
         {
-            checkLists.Add(new CheckList());
-            using (StreamReader sr = new StreamReader("test.txt", System.Text.Encoding.Default))
+            DataCheckList.LoadEncrypt();
+            DataCheckList.LoadSaveTrack(false);
+            platoons = Platoons.LoadPlatList(false);
+            subjects = Subjects.LoadSubList(false);
+            LoadCheckList();
+        }
+
+        static void LoadCheckList()
+        {
+            checkLists.Clear();
+            string path = Directory.GetCurrentDirectory();
+            string[] dirs = Directory.GetFiles(path + "\\CheckList\\", "*.test");
+            foreach (var item in dirs)
             {
-                string line;
-                string[] splitedLine;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    splitedLine = line.Split(';');
-                    checkLists[0].Tasks.Add(new Task(splitedLine[0], splitedLine[1]));
-                }
+                var json = File.ReadAllText(item);
+                CheckList tmp = JsonConvert.DeserializeObject<CheckList>(json);
+                checkLists.Add(tmp);
             }
+        }
+
+        public static void CreateSession(Platoon platoon, Student student, CheckList checkList, Subject subject, bool isTest)
+        {
+            session = new Session(platoon, subject, checkList, student, isTest);
         }
     }
 }

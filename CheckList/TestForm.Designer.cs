@@ -1,4 +1,4 @@
-﻿namespace CheckList
+﻿namespace CheckListNM
 {
     partial class TestForm
     {
@@ -28,40 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.nameCheckList = new System.Windows.Forms.Label();
+            this.components = new System.ComponentModel.Container();
             this.panelCheckList = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.labelTime = new System.Windows.Forms.Label();
             this.labelProgress = new System.Windows.Forms.Label();
             this.buttonCkeckTest = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // nameCheckList
-            // 
-            this.nameCheckList.AutoSize = true;
-            this.nameCheckList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.nameCheckList.Location = new System.Drawing.Point(12, 9);
-            this.nameCheckList.Name = "nameCheckList";
-            this.nameCheckList.Size = new System.Drawing.Size(180, 20);
-            this.nameCheckList.TabIndex = 0;
-            this.nameCheckList.Text = "Название ЧекЛиста";
             // 
             // panelCheckList
             // 
             this.panelCheckList.AutoScroll = true;
-            this.panelCheckList.Location = new System.Drawing.Point(13, 33);
+            this.panelCheckList.Location = new System.Drawing.Point(6, 12);
             this.panelCheckList.Name = "panelCheckList";
-            this.panelCheckList.Size = new System.Drawing.Size(775, 362);
+            this.panelCheckList.Size = new System.Drawing.Size(1006, 609);
             this.panelCheckList.TabIndex = 1;
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.SystemColors.Desktop;
+            this.panel2.Controls.Add(this.labelTime);
             this.panel2.Controls.Add(this.labelProgress);
             this.panel2.Controls.Add(this.buttonCkeckTest);
-            this.panel2.Location = new System.Drawing.Point(15, 405);
+            this.panel2.Location = new System.Drawing.Point(6, 627);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(772, 39);
+            this.panel2.Size = new System.Drawing.Size(991, 39);
             this.panel2.TabIndex = 2;
+            // 
+            // labelTime
+            // 
+            this.labelTime.AutoSize = true;
+            this.labelTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTime.Location = new System.Drawing.Point(141, 11);
+            this.labelTime.Name = "labelTime";
+            this.labelTime.Size = new System.Drawing.Size(54, 17);
+            this.labelTime.TabIndex = 2;
+            this.labelTime.Text = "Время:";
+            this.labelTime.Visible = false;
             // 
             // labelProgress
             // 
@@ -75,38 +80,45 @@
             // 
             // buttonCkeckTest
             // 
-            this.buttonCkeckTest.Location = new System.Drawing.Point(651, 3);
+            this.buttonCkeckTest.Location = new System.Drawing.Point(870, 3);
             this.buttonCkeckTest.Name = "buttonCkeckTest";
             this.buttonCkeckTest.Size = new System.Drawing.Size(118, 33);
             this.buttonCkeckTest.TabIndex = 0;
             this.buttonCkeckTest.Text = "Готово";
             this.buttonCkeckTest.UseVisualStyleBackColor = true;
+            this.buttonCkeckTest.Click += new System.EventHandler(this.buttonCkeckTest_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.ClientSize = new System.Drawing.Size(1018, 675);
+            this.ControlBox = false;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panelCheckList);
-            this.Controls.Add(this.nameCheckList);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "TestForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TestForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TestForm_FormClosed);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label nameCheckList;
         private System.Windows.Forms.Panel panelCheckList;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label labelProgress;
         private System.Windows.Forms.Button buttonCkeckTest;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label labelTime;
     }
 }
