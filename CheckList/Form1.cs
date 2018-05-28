@@ -85,6 +85,10 @@ namespace CheckListNM
             temporaryCheckListsForComboBox.Clear();
             foreach (var item in MainHandler.checkLists)
             {
+                if (MainHandler.subjects.SubList[comboBoxSubject.SelectedIndex].CheckListIndexes.Contains(item.Index)) ;
+            }
+            foreach (var item in MainHandler.checkLists)
+            {
                 if(MainHandler.subjects.SubList[comboBoxSubject.SelectedIndex].Name == item.Inform.Course)
                 {
                     comboBoxCheck.Items.Add(item.Inform.Name);

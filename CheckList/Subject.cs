@@ -8,22 +8,36 @@ namespace CheckList_Konstruktor
 {
     public class Subject
     {
-        private int[] checkListIndexes;
+        private List<int> checkListIndexes = new List<int>();
         private string name;
 
         public Subject()
         {
-            this.name = "";
+            this.Name = "";
+            this.CheckListIndexes = new List<int>();
         }
         public Subject(string name)
         {
-            this.name = name;
+            this.Name = name;
+            this.CheckListIndexes = new List<int>();
+        }
+
+        public Subject(string name, List<int> checkListIndexes)
+        {
+            this.Name = name;
+            this.CheckListIndexes = checkListIndexes;
         }
 
         public string Name
         {
             get { return name; }
             set { name = value; }
+        }
+
+        public List<int> CheckListIndexes
+        {
+            get { return checkListIndexes; }
+            set { checkListIndexes = value; }
         }
     }
 }

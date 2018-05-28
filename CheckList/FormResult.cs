@@ -9,13 +9,16 @@ namespace CheckListNM
         public FormResult(bool isTest)
         {
             InitializeComponent();
+            label6.Text = $"{MainHandler.session.countOfChecks} из {MainHandler.session.CheckList.CountTasks()}";
             if (!isTest)
-            { 
+            {
                 label8.Visible = false;
                 labelTimeResult.Visible = false;
             }
-            else labelTimeResult.Text = $"{MainHandler.timeResult / 60} мин. {MainHandler.timeResult % 60} c.";
-            label6.Text = $"{MainHandler.session.countOfChecks} из {MainHandler.session.CheckList.CountTasks()}";
+            else
+            {
+                labelTimeResult.Text = $"{MainHandler.timeResult / 60} мин. {MainHandler.timeResult % 60} c.";
+            }
             labelCurrentCourse.Text = MainHandler.session.CheckList.Inform.Course;
             labelTestName.Text = MainHandler.session.CheckList.Inform.Name;
             labelVzvodName.Text = MainHandler.session.Platoon.PlatNum.ToString();//TODO to object
