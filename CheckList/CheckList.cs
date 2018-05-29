@@ -15,7 +15,7 @@ namespace CheckListNM
         private List<Task> tasks; //список всех тасков
         private Marks notes; //критерии оценки
         private bool hasTimer; //засечка времени выполнения
-        private int index;
+        private string index;
 
 
         //секция конструкторов
@@ -72,7 +72,7 @@ namespace CheckListNM
             set { hasTimer = value; }
         }
 
-        public int Index { get => index; set => index = value; }
+        public string Index { get => index; set => index = value; }
 
         //секция методов
         public void AddTask(Task task) //добавление пункта в чек лист

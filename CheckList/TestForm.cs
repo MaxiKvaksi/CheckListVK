@@ -182,16 +182,16 @@ namespace CheckListNM
                     BackColor = Color.White
                 };
                 panelCheckList.Controls.Add(panel);
-                panel.Controls.Add(NewLB(100, 0, 900, height: 20, desc: MainHandler.session.CheckList.Inform.Name));
-                panel.Controls.Add(NewLB(100, panel.Controls[panel.Controls.Count - 1].Location.Y
+                panel.Controls.Add(NewLB(10, 0, 900, height: 20, desc: MainHandler.session.CheckList.Inform.Course));
+                panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
                     + panel.Controls[panel.Controls.Count - 1].Height + 5,
-                    100, height: 20, desc: "ОП.01"));
-                panel.Controls.Add(NewLB(100, panel.Controls[panel.Controls.Count - 1].Location.Y
-                    + panel.Controls[panel.Controls.Count - 1].Height + 5,
-                    100, height: 20, desc: "Занятие №1"));
-                panel.Controls.Add(NewLB(100, panel.Controls[panel.Controls.Count - 1].Location.Y
+                    100, height: 20, desc: $"Занятие №{MainHandler.session.CheckList.Inform.ClassNum}"));
+                panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
                     + panel.Controls[panel.Controls.Count - 1].Height + 5,
                     100, height: 20, desc: "КАРТОЧКА ЗАДАНИЯ"));
+                panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
+                    + panel.Controls[panel.Controls.Count - 1].Height + 5,
+                    100, height: 20, desc: MainHandler.session.CheckList.Inform.Name));
                 panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
                     + panel.Controls[panel.Controls.Count - 1].Height + 5,
                     100, height: 20, desc: MainHandler.session.CheckList.Inform.Purpose));

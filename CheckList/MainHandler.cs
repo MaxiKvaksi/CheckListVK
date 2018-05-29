@@ -19,25 +19,64 @@ namespace CheckListNM
         public static Subjects subjects = new Subjects();
         public static Platoons platoons = new Platoons();
         public static Session session;
-        public static List<CheckList> checkLists = new List<CheckList>();   
+
+        public static List<CheckList> checkLists = new List<CheckList>();
 
         public static void LoadInfo()
-        {
+        { 
             DataCheckList.LoadEncrypt();
             DataCheckList.LoadSaveTrack(false);
             platoons = Platoons.LoadPlatList(false);
             subjects = Subjects.LoadSubList(false);
-            LoadCheckList();
         }
 
-        static void LoadCheckList()
+        public static void MoveDerictory()
+        {
+            String sourcePath;
+            try
+            {
+                StreamReader sr = new StreamReader("ServerPath.txt");
+                sourcePath = sr.ReadLine();
+                sr.Close();
+                if (Directory.Exists(Directory.GetCurrentDirectory() + "\\CheckList") && Directory.Exists(sourcePath))
+                {
+                    Directory.Delete(Directory.GetCurrentDirectory() + "\\CheckList", true);
+                }
+                foreach (string dirPath in Directory.GetDirectories(sourcePath, "*",
+                    SearchOption.AllDirectories))
+                    Directory.CreateDirectory(dirPath.Replace(sourcePath, Directory.GetCurrentDirectory()
+                        + "\\CheckList"));
+
+                foreach (string newPath in Directory.GetFiles(sourcePath, "*.*",
+                    SearchOption.AllDirectories))
+                    File.Copy(newPath, newPath.Replace(sourcePath, Directory.GetCurrentDirectory()
+                        + "\\CheckList"), true);
+            }
+            catch (IOException e)
+            {
+                if (!Directory.Exists("CheckList"))
+                {
+                    Directory.CreateDirectory("CheckList");
+                    Directory.CreateDirectory("CheckList/Inform");
+                    File.Create("CheckList//Inform//Platoons.plat").Close();
+                    File.Create("CheckList//Inform//subjects.sub").Close();
+                    Directory.CreateDirectory("CheckList/Pictures");
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
+
+        public static void LoadCheckList(List<string> dirs)
         {
             checkLists.Clear();
-            string path = Directory.GetCurrentDirectory();
-            string[] dirs = Directory.GetFiles(path + "\\CheckList\\", "*.test");
+            //string[] dirs = Directory.GetFiles("CheckList\\", "*.test");
             foreach (var item in dirs)
             {
-                var json = File.ReadAllText(item);
+                var json = File.ReadAllText("CheckList\\" + item);
                 CheckList tmp = JsonConvert.DeserializeObject<CheckList>(json);
                 checkLists.Add(tmp);
             }

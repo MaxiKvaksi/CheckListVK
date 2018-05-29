@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ namespace CheckListNM
 
         public MainForm()
         {
+            MainHandler.MoveDerictory();
             MainHandler.LoadInfo();
             MainHandler.MainForm = this;
             InitializeComponent();          
@@ -27,14 +29,22 @@ namespace CheckListNM
 
         private void InitComboBoxes()
         {
-            foreach (var item in MainHandler.platoons.PlatList)
+            try
             {
-                comboBoxPlatoon.Items.Add(item.PlatNum);
+                foreach (var item in MainHandler.platoons.PlatList)
+                {
+                    comboBoxPlatoon.Items.Add(item.PlatNum);
+                }
             }
-            foreach (var item in MainHandler.subjects.SubList)
+            catch (Exception) { }
+            try
             {
-                comboBoxSubject.Items.Add(item.Name);
+                foreach (var item in MainHandler.subjects.SubList)
+                {
+                    comboBoxSubject.Items.Add(item.Name);
+                }
             }
+            catch (Exception e) { }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -83,17 +93,11 @@ namespace CheckListNM
             comboBoxCheck.Text = "";
             comboBoxCheck.Items.Clear();
             temporaryCheckListsForComboBox.Clear();
+            MainHandler.LoadCheckList(MainHandler.subjects.SubList[comboBoxSubject.SelectedIndex].CheckListIndexes);
             foreach (var item in MainHandler.checkLists)
             {
-                if (MainHandler.subjects.SubList[comboBoxSubject.SelectedIndex].CheckListIndexes.Contains(item.Index)) ;
-            }
-            foreach (var item in MainHandler.checkLists)
-            {
-                if(MainHandler.subjects.SubList[comboBoxSubject.SelectedIndex].Name == item.Inform.Course)
-                {
-                    comboBoxCheck.Items.Add(item.Inform.Name);
-                    temporaryCheckListsForComboBox.Add(item);
-                }    
+                comboBoxCheck.Items.Add(item.Inform.Name);
+                temporaryCheckListsForComboBox.Add(item);
             }
         }
     }
