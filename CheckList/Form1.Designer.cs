@@ -145,11 +145,12 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(192, 97);
+            this.label5.Location = new System.Drawing.Point(133, 96);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(454, 31);
+            this.label5.Size = new System.Drawing.Size(582, 31);
             this.label5.TabIndex = 10;
-            this.label5.Text = "Тестирование знаний \"Чек лист\"";
+            this.label5.Text = "Тестирование знаний \"Карточка задания\"";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // contextMenuStrip1
             // 
@@ -183,7 +184,7 @@
             this.Controls.Add(this.StartLearning);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "MainForm";
-            this.Text = "ВК чек лист";
+            this.Text = "Карточка задание";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

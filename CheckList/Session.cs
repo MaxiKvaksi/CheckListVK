@@ -7,11 +7,11 @@ namespace CheckListNM
         Platoon platoon;
         Subject subject;
         Student student;
-        CheckList checkList;
+        CheckListClass checkList;
         bool isTest;
         public int countOfChecks;
 
-        public Session(Platoon platoon, Subject subject, CheckList checkList, Student student, bool isTest)
+        public Session(Platoon platoon, Subject subject, CheckListClass checkList, Student student, bool isTest)
         {
             this.Platoon = platoon;
             this.Subject = subject;
@@ -23,7 +23,7 @@ namespace CheckListNM
         public Platoon Platoon { get => platoon; set => platoon = value; }
         public Subject Subject { get => subject; set => subject = value; }
         public Student Student { get => student; set => student = value; }
-        public CheckList CheckList { get => checkList; set => checkList = value; }
+        public CheckListClass CheckList { get => checkList; set => checkList = value; }
         public bool IsTest { get => isTest; set => isTest = value; }
     }
 }

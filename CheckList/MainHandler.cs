@@ -20,7 +20,7 @@ namespace CheckListNM
         public static Platoons platoons = new Platoons();
         public static Session session;
 
-        public static List<CheckList> checkLists = new List<CheckList>();
+        public static List<CheckListClass> checkLists = new List<CheckListClass>();
 
         public static void LoadInfo()
         { 
@@ -54,6 +54,7 @@ namespace CheckListNM
             }
             catch (IOException e)
             {
+                MessageBox.Show("Не удалось открыть файлы с тестами...");
                 if (!Directory.Exists("CheckList"))
                 {
                     Directory.CreateDirectory("CheckList");
@@ -77,12 +78,12 @@ namespace CheckListNM
             foreach (var item in dirs)
             {
                 var json = File.ReadAllText("CheckList\\" + item);
-                CheckList tmp = JsonConvert.DeserializeObject<CheckList>(json);
+                CheckListClass tmp = JsonConvert.DeserializeObject<CheckListClass>(json);
                 checkLists.Add(tmp);
             }
         }
 
-        public static void CreateSession(Platoon platoon, Student student, CheckList checkList, Subject subject, bool isTest)
+        public static void CreateSession(Platoon platoon, Student student, CheckListClass checkList, Subject subject, bool isTest)
         {
             session = new Session(platoon, subject, checkList, student, isTest);
         }

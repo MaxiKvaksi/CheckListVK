@@ -48,7 +48,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CheckList.cs" />
+    <Compile Include="BigImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BigImage.Designer.cs">
+      <DependentUpon>BigImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckListClass.cs" />
     <Compile Include="DataChekList.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -81,6 +87,9 @@
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Title.cs" />
+    <EmbeddedResource Include="BigImage.resx">
+      <DependentUpon>BigImage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

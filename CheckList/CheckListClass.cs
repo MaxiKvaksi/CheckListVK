@@ -8,7 +8,7 @@ using CheckList_Konstruktor;
 
 namespace CheckListNM
 {
-    public class CheckList
+    public class CheckListClass
     {
         //секция полей карточки задания
         private Title inform; //информация титульного листа
@@ -19,14 +19,14 @@ namespace CheckListNM
 
 
         //секция конструкторов
-        public CheckList(string Course, string Name, List<Task> Tasks, Marks Notes, bool hasTimer)
+        public CheckListClass(string Course, string Name, List<Task> Tasks, Marks Notes, bool hasTimer)
         {
             this.inform = new Title(Name, Course);
             this.Tasks = Tasks;
             this.Notes = Notes;
             this.hasTimer = hasTimer;
         }
-        public CheckList(string Course, string Name, Task Task_One, Marks Notes, bool hasTimer)
+        public CheckListClass(string Course, string Name, Task Task_One, Marks Notes, bool hasTimer)
         {
             this.inform = new Title(Name, Course);
             this.Tasks = new List<Task>();
@@ -34,14 +34,14 @@ namespace CheckListNM
             this.Notes = Notes;
             this.hasTimer = hasTimer;
         }
-        public CheckList(string Course, string Name, bool hasTimer)
+        public CheckListClass(string Course, string Name, bool hasTimer)
         {
             this.inform = new Title(Name, Course);
             this.Tasks = new List<Task>();
             this.Notes = new Marks();
             this.hasTimer = hasTimer;
         }
-        public CheckList()
+        public CheckListClass()
         {
             this.inform = new Title("Unknown", "Unknown");
             this.Tasks = new List<Task>();

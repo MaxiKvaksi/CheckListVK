@@ -12,13 +12,13 @@ namespace CheckList_Konstruktor
     /// статичный класс данных чек листа для связи между формами
     public static class DataCheckList
     {
-        private static CheckList check = null; //хранит чек листы
+        private static CheckListClass check = null; //хранит чек листы
         private static Subjects cource = null; //хранит предметы
         private static Platoons platoons = null; //хранит взвода
         private static string saveTrack = ""; //хранит путь сохранения
         private static bool encrypt = false; //проверяет, шифровать или нет
 
-        public static CheckList Check
+        public static CheckListClass Check
         {
             get { return DataCheckList.check; }
             set { DataCheckList.check = value; }

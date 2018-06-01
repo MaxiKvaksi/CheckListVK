@@ -14,6 +14,8 @@ namespace CheckListNM
             {
                 label8.Visible = false;
                 labelTimeResult.Visible = false;
+                label3.Visible = false;
+                label6.Visible = false;
             }
             else
             {

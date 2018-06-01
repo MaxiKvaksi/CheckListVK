@@ -16,7 +16,7 @@ namespace CheckListNM
     {
         bool[] comboBoxes = { false, false, false, false };
 
-        private static List<CheckList> temporaryCheckListsForComboBox = new List<CheckList>();//костылина
+        private static List<CheckListClass> temporaryCheckListsForComboBox = new List<CheckListClass>();//костылина
 
         public MainForm()
         {
@@ -99,6 +99,11 @@ namespace CheckListNM
                 comboBoxCheck.Items.Add(item.Inform.Name);
                 temporaryCheckListsForComboBox.Add(item);
             }
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
