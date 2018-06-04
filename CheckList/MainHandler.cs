@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using CheckList_Konstruktor;
-
+using CheckList;
 namespace CheckListNM
 {
     class MainHandler
@@ -74,7 +70,6 @@ namespace CheckListNM
         public static void LoadCheckList(List<string> dirs)
         {
             checkLists.Clear();
-            //string[] dirs = Directory.GetFiles("CheckList\\", "*.test");
             foreach (var item in dirs)
             {
                 var json = File.ReadAllText("CheckList\\" + item);
@@ -86,6 +81,29 @@ namespace CheckListNM
         public static void CreateSession(Platoon platoon, Student student, CheckListClass checkList, Subject subject, bool isTest)
         {
             session = new Session(platoon, subject, checkList, student, isTest);
+        }
+
+        public static void SaveResult()
+        {
+            String sourcePath;
+            try
+            {
+                StreamReader sr = new StreamReader("ServerPath.txt");
+                sourcePath = sr.ReadLine() + "Marks.marks";
+                sr.Close();
+                if (!File.Exists(sourcePath))
+                {
+                    File.Create(sourcePath);
+                }
+                Result result = new Result(session.Subject.Name, session.CheckList.Inform.Name,
+                    session.Platoon.PlatNum.ToString(), session.Student.Fio);
+                string data = JsonConvert.SerializeObject(result);
+                File.AppendAllText(sourcePath, data);
+            }
+            catch (Exception e)
+            {
+
+            }
         }
     }
 }

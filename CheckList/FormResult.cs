@@ -26,6 +26,7 @@ namespace CheckListNM
             labelVzvodName.Text = MainHandler.session.Platoon.PlatNum.ToString();//TODO to object
             labelFIOName.Text = MainHandler.session.Student.Fio;
             SetMark(isTest);
+            MainHandler.SaveResult();
         }
 
         private void buttonCloseTest_Click(object sender, System.EventArgs e)
