@@ -10,29 +10,29 @@ namespace CheckListNM
     {
         private int timer;//для отсчёта времени с начала запуска теста
         private int doneCount = 0;
+        int text = 0;
+        int count = 0;
 
         public TestForm()
         {
             InitializeComponent();
-            InitCheckList();
+            InitHeader();
             if (MainHandler.session.IsTest)
             {
-                InitTimer();
+                labelTime.Visible = true;
             }
-        }
-
-        private void InitTimer()
-        {
-            timer1.Start();
-            labelTime.Visible = true;
+            else
+            {
+                startButton.Visible = false;
+                InitCheckList();
+            }
+            
         }
 
         void InitCheckList()
         {
-            int count = 0;
-            int text = 0;
             Image image;
-            InitHeader();
+            
             labelProgress.Text = $"Выполнено {doneCount} из {MainHandler.session.CheckList.CountTasks()}";
             for (int i = 1; i < MainHandler.session.CheckList.Tasks.Count + 1; i++)
             {
@@ -79,177 +79,6 @@ namespace CheckListNM
                     panelCheckList.Controls[panelCheckList.Controls.Count - 5].Width));
                 count++;
             }
-
-            RichTextBox NewRTB(int posX, int posY, int width, int height = 96,
-                string desc = "", bool color = false)
-            {
-                text++;
-                Color c = color ? Color.Gray : Color.White;
-                return new RichTextBox
-                {
-                    Location = new System.Drawing
-                    .Point(posX, posY),
-                    Name = "LabelTF" + text + 1,
-                    Size = new System.Drawing.Size(width, height),
-                    TabIndex = 0,
-                    ReadOnly = true,
-                    Text = desc,
-                    BackColor = c,
-                    BorderStyle = BorderStyle.FixedSingle,
-                    Font = new Font(Font.OriginalFontName, 10, FontStyle.Regular)
-                };
-            }
-            Label NewLB(int posX, int posY, int width, int height = 96,
-                string desc = "", bool isCenter = false)
-            {
-                text++;
-                Label label = new Label
-                {
-                    Location = new System.Drawing
-                    .Point(posX, posY),
-                    Name = "LabelTF" + text + 1,
-                    Size = new System.Drawing.Size(width, height),
-                    TabIndex = 0,
-                    Text = desc,
-                    BorderStyle = BorderStyle.None,
-                    Font = new Font(Font.OriginalFontName, 13, FontStyle.Regular),
-                    AutoSize = true
-                };
-                return label;
-            }
-
-            PictureBox NewPB(int posX, int posY, int width, int height = 96,
-                string desc = "", bool color = false, Image img = null)
-            {
-                text++;
-                Color c = color ? Color.Black : Color.White;
-                PictureBox pictureBox = new PictureBox
-                {
-                    Location = new System.Drawing
-                    .Point(posX, posY),
-                    Name = "PictureBoxTF" + text + 1,
-                    Size = new System.Drawing.Size(width, height),
-                    TabIndex = 0,
-                    Text = desc,
-                    BackColor = c,
-                    Image = img,
-                    SizeMode = PictureBoxSizeMode.Zoom,
-                    Cursor = Cursors.Hand
-                };
-                pictureBox.Click += Click;
-                void Click(object sender, EventArgs e)
-                {
-                    new BigImage(img).Show();
-                }
-                return pictureBox;
-            }
-
-            Panel NewChB(int posX, int posY, int width, int height = 96,
-                string desc = "")
-            {
-                text++;
-                Panel panel = new Panel
-                {
-                    Location = new System.Drawing
-                    .Point(posX, posY),
-                    Name = "PanelTF" + text + 1,
-                    Size = new System.Drawing.Size(width, height),
-                    TabIndex = 0,
-                    Text = desc,
-                    Enabled = true,
-                    BackColor = Color.White
-                };
-
-                CheckBox checkBox = new CheckBox();
-                checkBox.Location = new System.Drawing.Point(2, 2);
-                checkBox.Name = "CheckBoxTF" + text + 1;
-                checkBox.Margin = new Padding(40);
-                checkBox.CheckedChanged += CheckedChangedD;
-                panel.Controls.Add(checkBox);
-                return panel;
-
-                void CheckedChangedD(object sender, EventArgs e)
-                {
-                    CheckBox cb = (CheckBox)sender;
-                    if (cb.Checked) doneCount++;
-                    else doneCount--;
-                    labelProgress.Text = $"Выполнено {doneCount} из {MainHandler.session.CheckList.CountTasks()}";
-                }
-            }
-
-            void InitHeader()
-            {
-                Panel panel = new Panel
-                {
-                    Location = new System.Drawing
-                    .Point(0, 0),
-                    Name = "PanelTF" + text + 1,
-                    Size = new System.Drawing.Size(980, 300),
-                    TabIndex = 0,
-                    Enabled = true,
-                    BackColor = Color.White
-                };
-                panelCheckList.Controls.Add(panel);
-                panel.Controls.Add(NewLB(10, 0, 900, height: 20, desc: MainHandler.session.CheckList.Inform.Course));
-                panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
-                    + panel.Controls[panel.Controls.Count - 1].Height + 5,
-                    100, height: 20, desc: $"Занятие №{MainHandler.session.CheckList.Inform.ClassNum}"));
-                panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
-                    + panel.Controls[panel.Controls.Count - 1].Height + 5,
-                    100, height: 20, desc: "КАРТОЧКА ЗАДАНИЯ"));
-                panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
-                    + panel.Controls[panel.Controls.Count - 1].Height + 5,
-                    100, height: 20, desc: MainHandler.session.CheckList.Inform.Name));
-                panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
-                    + panel.Controls[panel.Controls.Count - 1].Height + 5,
-                    100, height: 20, desc: MainHandler.session.CheckList.Inform.Purpose));
-                panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
-                    + panel.Controls[panel.Controls.Count - 1].Height + 5,
-                    100, height: 20, desc: MainHandler.session.CheckList.Inform.Time.ToString()));
-                panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
-                    + panel.Controls[panel.Controls.Count - 1].Height + 5,
-                    100, height: 20, desc: MainHandler.session.CheckList.Inform.Place));
-                panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
-                    + panel.Controls[panel.Controls.Count - 1].Height + 5,
-                    100, height: 20, desc: MainHandler.session.CheckList.Inform.Material));
-                panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
-                    + panel.Controls[panel.Controls.Count - 1].Height + 5,
-                    100, height: 20, desc: MainHandler.session.CheckList.Inform.Literature));
-                panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
-                    + panel.Controls[panel.Controls.Count - 1].Height + 5,
-                    100, height: 20, desc: $"Отлично:{MainHandler.session.CheckList.Notes.Excellent.ToString()}; " +
-                    $"Хорошо:{ MainHandler.session.CheckList.Notes.Good}; Удовлетворительно:{MainHandler.session.CheckList.Notes.Satisfactory}"));
-                panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
-                    + panel.Controls[panel.Controls.Count - 1].Height + 5,
-                    100, height: 20, desc: MainHandler.session.CheckList.Inform.Decreace));
-
-
-                panelCheckList.Controls.Add(NewRTB(0,
-                    panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.Y
-                    + panelCheckList.Controls[panelCheckList.Controls.Count - 1].Height + 20,
-                    100, height: 30, desc: "№ действия", color: true));
-                panelCheckList.Controls.Add(
-                    NewRTB(panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.X
-                    + panelCheckList.Controls[panelCheckList.Controls.Count - 1].Width,
-                    panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.Y,
-                    200, height: 30, desc: "Название действия", color: true));
-                panelCheckList.Controls.Add(
-                    NewRTB(panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.X
-                    + panelCheckList.Controls[panelCheckList.Controls.Count - 1].Width,
-                    panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.Y,
-                    350, height: 30, desc: "Порядок выполнения", color: true));
-                panelCheckList.Controls.Add(
-                    NewRTB(panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.X
-                    + panelCheckList.Controls[panelCheckList.Controls.Count - 1].Width,
-                    panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.Y,
-                    240, height: 30, desc: "Контроль", color: true));
-                panelCheckList.Controls.Add(
-                    NewRTB(panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.X
-                    + panelCheckList.Controls[panelCheckList.Controls.Count - 1].Width,
-                    panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.Y,
-                    90, height: 30, desc: "Выполнено", color: true));
-                count++;
-            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -275,6 +104,193 @@ namespace CheckListNM
             MainHandler.TestForm = testForm;
             testForm.Show();
             this.Close();
+        }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            InitCheckList();
+            timer1.Start();
+            startButton.Visible = false;
+        }
+
+        void InitHeader()
+        {
+            Panel panel = new Panel
+            {
+                Location = new System.Drawing
+                .Point(0, 0),
+                Name = "PanelTF" + text + 1,
+                Size = new System.Drawing.Size(980, 300),
+                TabIndex = 0,
+                Enabled = true,
+                BackColor = Color.White
+            };
+            panelCheckList.Controls.Add(panel);
+            panel.Controls.Add(NewLB(10, 0, 900, height: 20, desc: "КАРТОЧКА ЗАДАНИЯ"));
+            panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
+                + panel.Controls[panel.Controls.Count - 1].Height + 5,
+                100, height: 20, desc: MainHandler.session.CheckList.Inform.Course));
+            panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
+                + panel.Controls[panel.Controls.Count - 1].Height + 5,
+                100, height: 20, desc: $"Занятие №{MainHandler.session.CheckList.Inform.ClassNum}. \"" +
+                $"{MainHandler.session.CheckList.Inform.Purpose}\""));
+            panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
+                + panel.Controls[panel.Controls.Count - 1].Height + 5,
+                100, height: 20, desc: MainHandler.session.CheckList.Inform.Topic));
+            panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
+                + panel.Controls[panel.Controls.Count - 1].Height + 5,
+                100, height: 20, desc: $"Цель:{MainHandler.session.CheckList.Inform.Purpose}"));
+            panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
+                + panel.Controls[panel.Controls.Count - 1].Height + 5,
+                100, height: 20, desc: $"Время:{MainHandler.session.CheckList.Inform.Time.ToString()} мин."));
+            panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
+                + panel.Controls[panel.Controls.Count - 1].Height + 5,
+                100, height: 20, desc: $"Место:{MainHandler.session.CheckList.Inform.Place}"));
+            panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
+                + panel.Controls[panel.Controls.Count - 1].Height + 5,
+                100, height: 20, desc: $"Материальное обеспечение:{MainHandler.session.CheckList.Inform.Material}"));
+            panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
+                + panel.Controls[panel.Controls.Count - 1].Height + 5,
+                100, height: 20, desc: $"Литература:{MainHandler.session.CheckList.Inform.Literature}"));
+            panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
+                + panel.Controls[panel.Controls.Count - 1].Height + 5,
+                100, height: 20, desc: $"Начало по команде:{MainHandler.session.CheckList.Inform.Comand}"));
+            panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
+                + panel.Controls[panel.Controls.Count - 1].Height + 5,
+                100, height: 20, desc: $"Критерии оценки: Отлично:{MainHandler.session.CheckList.Notes.Excellent.ToString()}; " +
+                $"Хорошо:{ MainHandler.session.CheckList.Notes.Good}; Удовлетворительно:{MainHandler.session.CheckList.Notes.Satisfactory}"));
+            panel.Controls.Add(NewLB(10, panel.Controls[panel.Controls.Count - 1].Location.Y
+                + panel.Controls[panel.Controls.Count - 1].Height + 5,
+                100, height: 20, desc: $"Оценка снижается: " +
+                $"{MainHandler.session.CheckList.Inform.Decreace}"));
+
+
+            panelCheckList.Controls.Add(NewRTB(0,
+                panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.Y
+                + panelCheckList.Controls[panelCheckList.Controls.Count - 1].Height + 20,
+                100, height: 30, desc: "№ действия", color: true));
+            panelCheckList.Controls.Add(
+                NewRTB(panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.X
+                + panelCheckList.Controls[panelCheckList.Controls.Count - 1].Width,
+                panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.Y,
+                200, height: 30, desc: "Название действия", color: true));
+            panelCheckList.Controls.Add(
+                NewRTB(panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.X
+                + panelCheckList.Controls[panelCheckList.Controls.Count - 1].Width,
+                panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.Y,
+                350, height: 30, desc: "Порядок выполнения", color: true));
+            panelCheckList.Controls.Add(
+                NewRTB(panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.X
+                + panelCheckList.Controls[panelCheckList.Controls.Count - 1].Width,
+                panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.Y,
+                240, height: 30, desc: "Контроль", color: true));
+            panelCheckList.Controls.Add(
+                NewRTB(panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.X
+                + panelCheckList.Controls[panelCheckList.Controls.Count - 1].Width,
+                panelCheckList.Controls[panelCheckList.Controls.Count - 1].Location.Y,
+                90, height: 30, desc: "Выполнено", color: true));
+            count++;
+        }
+
+
+        RichTextBox NewRTB(int posX, int posY, int width, int height = 96,
+                string desc = "", bool color = false)
+        {
+            text++;
+            Color c = color ? Color.Gray : Color.White;
+            return new RichTextBox
+            {
+                Location = new System.Drawing
+                .Point(posX, posY),
+                Name = "LabelTF" + text + 1,
+                Size = new System.Drawing.Size(width, height),
+                TabIndex = 0,
+                ReadOnly = true,
+                Text = desc,
+                BackColor = c,
+                BorderStyle = BorderStyle.FixedSingle,
+                Font = new Font(Font.OriginalFontName, 10, FontStyle.Regular)
+            };
+        }
+        Label NewLB(int posX, int posY, int width, int height = 96,
+            string desc = "", bool isCenter = false)
+        {
+            text++;
+            Label label = new Label
+            {
+                Location = new System.Drawing
+                .Point(posX, posY),
+                Name = "LabelTF" + text + 1,
+                Size = new System.Drawing.Size(width, height),
+                TabIndex = 0,
+                Text = desc,
+                BorderStyle = BorderStyle.None,
+                Font = new Font(Font.OriginalFontName, 13, FontStyle.Regular),
+                AutoSize = true,
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+            return label;
+        }
+
+        PictureBox NewPB(int posX, int posY, int width, int height = 96,
+            string desc = "", bool color = false, Image img = null)
+        {
+            text++;
+            Color c = color ? Color.Black : Color.White;
+            PictureBox pictureBox = new PictureBox
+            {
+                Location = new System.Drawing
+                .Point(posX, posY),
+                Name = "PictureBoxTF" + text + 1,
+                Size = new System.Drawing.Size(width, height),
+                TabIndex = 0,
+                Text = desc,
+                BackColor = c,
+                Image = img,
+                SizeMode = PictureBoxSizeMode.Zoom,
+                Cursor = Cursors.Hand
+            };
+            pictureBox.Click += Click;
+            ToolTip tip = new ToolTip();
+            tip.SetToolTip(pictureBox, "Нажми на изображение, чтобы увеличить");
+            void Click(object sender, EventArgs e)
+            {
+                new BigImage(img).Show();
+            }
+            return pictureBox;
+        }
+
+        Panel NewChB(int posX, int posY, int width, int height = 96,
+            string desc = "")
+        {
+            text++;
+            Panel panel = new Panel
+            {
+                Location = new System.Drawing
+                .Point(posX, posY),
+                Name = "PanelTF" + text + 1,
+                Size = new System.Drawing.Size(width, height),
+                TabIndex = 0,
+                Text = desc,
+                Enabled = true,
+                BackColor = Color.White
+            };
+
+            CheckBox checkBox = new CheckBox();
+            checkBox.Location = new System.Drawing.Point(2, 2);
+            checkBox.Name = "CheckBoxTF" + text + 1;
+            checkBox.Margin = new Padding(40);
+            checkBox.CheckedChanged += CheckedChangedD;
+            panel.Controls.Add(checkBox);
+            return panel;
+
+            void CheckedChangedD(object sender, EventArgs e)
+            {
+                CheckBox cb = (CheckBox)sender;
+                if (cb.Checked) doneCount++;
+                else doneCount--;
+                labelProgress.Text = $"Выполнено {doneCount} из {MainHandler.session.CheckList.CountTasks()}";
+            }
         }
     }
 }

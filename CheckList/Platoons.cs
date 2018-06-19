@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Windows.Forms;
 using System.Security.Cryptography;
+using CheckListNM;
 
 namespace CheckList_Konstruktor
 {
@@ -65,13 +66,16 @@ namespace CheckList_Konstruktor
                 MessageBox.Show(e.Message);
             }
         }
-        public static Platoons LoadPlatList(bool encrypt) //чтение предметов
+        public static Platoons LoadPlatList() //чтение предметов
         {
             String data = "";
             try
             {
                 data = File.ReadAllText(Application.StartupPath + @"\CheckList\Inform\Platoons.plat");
-                if (encrypt) data = Sini4ka.Landing(data, "синяя синичка");
+                if (MainHandler.isCrypto)
+                {
+                    data = Sini4ka.Landing(data, "синяя синичка");
+                }
                 return JsonConvert.DeserializeObject<Platoons>(data);
             }
             catch (Exception e)

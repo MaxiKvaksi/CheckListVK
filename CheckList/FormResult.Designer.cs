@@ -63,7 +63,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 21);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(666, 399);
+            this.panel1.Size = new System.Drawing.Size(666, 417);
             this.panel1.TabIndex = 1;
             // 
             // labelFinalMark
@@ -71,7 +71,7 @@
             this.labelFinalMark.AutoSize = true;
             this.labelFinalMark.Font = new System.Drawing.Font("Century Gothic", 17.75F);
             this.labelFinalMark.ForeColor = System.Drawing.Color.Red;
-            this.labelFinalMark.Location = new System.Drawing.Point(151, 293);
+            this.labelFinalMark.Location = new System.Drawing.Point(268, 293);
             this.labelFinalMark.Name = "labelFinalMark";
             this.labelFinalMark.Size = new System.Drawing.Size(112, 30);
             this.labelFinalMark.TabIndex = 16;
@@ -83,9 +83,9 @@
             this.label7.Font = new System.Drawing.Font("Century Gothic", 17.75F);
             this.label7.Location = new System.Drawing.Point(8, 293);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(131, 30);
+            this.label7.Size = new System.Drawing.Size(268, 30);
             this.label7.TabIndex = 13;
-            this.label7.Text = "Результат:";
+            this.label7.Text = "Оценка по времени:";
             // 
             // groupBox2
             // 
@@ -239,7 +239,7 @@
             // 
             this.buttonCloseTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCloseTest.Font = new System.Drawing.Font("Century Gothic", 11.25F);
-            this.buttonCloseTest.Location = new System.Drawing.Point(254, 342);
+            this.buttonCloseTest.Location = new System.Drawing.Point(252, 369);
             this.buttonCloseTest.Name = "buttonCloseTest";
             this.buttonCloseTest.Size = new System.Drawing.Size(162, 45);
             this.buttonCloseTest.TabIndex = 13;

@@ -35,12 +35,15 @@
             this.labelProgress = new System.Windows.Forms.Label();
             this.buttonCkeckTest = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.startButton = new System.Windows.Forms.Button();
+            this.panelCheckList.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelCheckList
             // 
             this.panelCheckList.AutoScroll = true;
+            this.panelCheckList.Controls.Add(this.startButton);
             this.panelCheckList.Location = new System.Drawing.Point(6, 12);
             this.panelCheckList.Name = "panelCheckList";
             this.panelCheckList.Size = new System.Drawing.Size(1006, 609);
@@ -48,7 +51,7 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.Desktop;
+            this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.panel2.Controls.Add(this.labelTime);
             this.panel2.Controls.Add(this.labelProgress);
             this.panel2.Controls.Add(this.buttonCkeckTest);
@@ -93,6 +96,18 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // startButton
+            // 
+            this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.startButton.ForeColor = System.Drawing.Color.Blue;
+            this.startButton.Location = new System.Drawing.Point(417, 505);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(218, 70);
+            this.startButton.TabIndex = 0;
+            this.startButton.Text = "Начать";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -106,6 +121,7 @@
             this.Name = "TestForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TestForm_FormClosed);
+            this.panelCheckList.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -119,5 +135,6 @@
         private System.Windows.Forms.Button buttonCkeckTest;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label labelTime;
+        private System.Windows.Forms.Button startButton;
     }
 }

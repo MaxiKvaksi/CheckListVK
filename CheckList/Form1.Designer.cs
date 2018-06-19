@@ -42,6 +42,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Exit = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -173,11 +174,22 @@
             this.panel1.Size = new System.Drawing.Size(793, 113);
             this.panel1.TabIndex = 12;
             // 
+            // Exit
+            // 
+            this.Exit.Location = new System.Drawing.Point(677, 391);
+            this.Exit.Name = "Exit";
+            this.Exit.Size = new System.Drawing.Size(128, 44);
+            this.Exit.TabIndex = 13;
+            this.Exit.Text = "Выход";
+            this.Exit.UseVisualStyleBackColor = true;
+            this.Exit.Click += new System.EventHandler(this.Exit_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(817, 447);
+            this.Controls.Add(this.Exit);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.startTesting);
@@ -207,6 +219,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button Exit;
     }
 }
 

@@ -20,7 +20,7 @@ namespace CheckListNM
 
         public MainForm()
         {
-            MainHandler.MoveDerictory();
+            MainHandler.MoveDirectory();
             MainHandler.LoadInfo();
             MainHandler.MainForm = this;
             InitializeComponent();          
@@ -104,6 +104,11 @@ namespace CheckListNM
         private void label5_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Exit_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

@@ -51,8 +51,11 @@
             this.Controls.Add(this.pictureBox1);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.ImeMode = System.Windows.Forms.ImeMode.Close;
             this.Name = "BigImage";
-            this.Text = "_";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Изображение";
             this.Click += new System.EventHandler(this.BigImage_Click);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

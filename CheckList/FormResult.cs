@@ -6,6 +6,7 @@ namespace CheckListNM
 {
     public partial class FormResult : Form
     {
+        string mark;
         public FormResult(bool isTest)
         {
             InitializeComponent();
@@ -16,6 +17,8 @@ namespace CheckListNM
                 labelTimeResult.Visible = false;
                 label3.Visible = false;
                 label6.Visible = false;
+                label7.Visible = false;
+                groupBox2.Visible = false;
             }
             else
             {
@@ -26,7 +29,7 @@ namespace CheckListNM
             labelVzvodName.Text = MainHandler.session.Platoon.PlatNum.ToString();//TODO to object
             labelFIOName.Text = MainHandler.session.Student.Fio;
             SetMark(isTest);
-            MainHandler.SaveResult();
+            MainHandler.SaveResult(mark, isTest);
         }
 
         private void buttonCloseTest_Click(object sender, System.EventArgs e)
@@ -40,31 +43,32 @@ namespace CheckListNM
             if (!isTest)
             {
                 labelFinalMark.ForeColor = Color.Green;
-                labelFinalMark.Text = "Пройдено";
+                mark = labelFinalMark.Text = "Пройдено";
             }
             else
             {
                 if (MainHandler.session.countOfChecks < MainHandler.session.CheckList.CountTasks())
                 {
-                    labelFinalMark.Text = "Неудовлетворительно.";
+                    mark = labelFinalMark.Text = "Неудовлетворительно."+ "\r\n" + "Выполнено не всё!";
                 }
                 else
                 {
                     int time = MainHandler.timeResult;
                     if (time < MainHandler.session.CheckList.Notes.Excellent)
                     {
-                        labelFinalMark.Text = "Отлично.";
+                        mark = labelFinalMark.Text = "Отлично.";
                     }
                     else if (time < MainHandler.session.CheckList.Notes.Good)
                     {
-                        labelFinalMark.Text = "Хорошо.";
+                        mark = labelFinalMark.Text = "Хорошо.";
                     }
                     else if (time < MainHandler.session.CheckList.Notes.Satisfactory)
                     {
-                        labelFinalMark.Text = "Удовлетворительно.";
-                    }else
+                        mark = labelFinalMark.Text = "Удовлетворительно.";
+                    }
+                    else
                     {
-                        labelFinalMark.Text = "Неудовлетворительно.";
+                        mark = labelFinalMark.Text = "Неудовлетворительно.";
                     }
 
                 }
